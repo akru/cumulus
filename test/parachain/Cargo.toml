@@ -24,22 +24,22 @@ ansi_term = "0.12.1"
 parachain-runtime = { package = "cumulus-test-parachain-runtime", path = "runtime" }
 
 # Substrate dependencies
-sp-runtime = { git = "https://github.com/akru/substrate", default-features = false }
-sp-io = { git = "https://github.com/akru/substrate" }
-sp-core = { git = "https://github.com/akru/substrate" }
-sp-inherents = { git = "https://github.com/akru/substrate" }
-sp-consensus = { git = "https://github.com/akru/substrate" }
-sc-consensus = { git = "https://github.com/akru/substrate" }
-sc-cli = { git = "https://github.com/akru/substrate" }
-sc-executor = { git = "https://github.com/akru/substrate" }
-sc-service = { git = "https://github.com/akru/substrate" }
-sc-transaction-pool = { git = "https://github.com/akru/substrate" }
-sp-transaction-pool = { git = "https://github.com/akru/substrate" }
-sc-network = { git = "https://github.com/akru/substrate" }
-sc-basic-authorship = { git = "https://github.com/akru/substrate", version = "0.8.0-alpha.5" }
-sp-timestamp = { git = "https://github.com/akru/substrate" }
-sc-finality-grandpa = { git = "https://github.com/akru/substrate" }
-sc-informant = { git = "https://github.com/akru/substrate" }
+sp-runtime = { version = "2.0.0-rc5", default-features = false }
+sp-io = "2.0.0-rc5"
+sp-core = "2.0.0-rc5"
+sp-inherents = "2.0.0-rc5"
+sp-consensus = "0.8.0-rc5"
+sc-consensus = "0.8.0-rc5"
+sc-cli = "0.8.0-rc5"
+sc-executor = "0.8.0-rc5"
+sc-service = "0.8.0-rc5"
+sc-transaction-pool = "2.0.0-rc5"
+sp-transaction-pool = "2.0.0-rc5"
+sc-network = "0.8.0-rc5"
+sc-basic-authorship = "0.8.0-rc.5"
+sp-timestamp = "2.0.0-rc5"
+sc-finality-grandpa = "0.8.0-rc5"
+sc-informant = "0.8.0-rc5"
 
 # Cumulus dependencies
 cumulus-consensus = { path = "../../consensus" }
@@ -48,14 +48,14 @@ cumulus-network = { path = "../../network" }
 cumulus-primitives = { path = "../../primitives" }
 
 # Polkadot dependencies
-polkadot-primitives = { git = "https://github.com/akru/polkadot" }
-polkadot-parachain = { git = "https://github.com/akru/polkadot" }
-polkadot-collator = { git = "https://github.com/akru/polkadot" }
-polkadot-service = { git = "https://github.com/akru/polkadot" }
-polkadot-cli = { git = "https://github.com/akru/polkadot" }
+polkadot-primitives = { git = "https://github.com/akru/polkadot", branch = "crates-io" }
+polkadot-parachain = { git = "https://github.com/akru/polkadot", branch = "crates-io" }
+polkadot-collator = { git = "https://github.com/akru/polkadot", branch = "crates-io" }
+polkadot-service = { git = "https://github.com/akru/polkadot", branch = "crates-io" }
+polkadot-cli = { git = "https://github.com/akru/polkadot", branch = "crates-io" }
 
 [build-dependencies]
-substrate-build-script-utils = { git = "https://github.com/akru/substrate" }
+substrate-build-script-utils = "2.0.0-rc5"
 
 [dev-dependencies]
 assert_cmd = "0.12"
@@ -67,14 +67,14 @@ hex = "0.4"
 serde_json = "1.0"
 
 # Polkadot dependencies
-polkadot-runtime-common = { git = "https://github.com/akru/polkadot" }
-polkadot-runtime = { git = "https://github.com/akru/polkadot" }
+polkadot-runtime-common = { git = "https://github.com/akru/polkadot", branch = "crates-io" }
+polkadot-runtime = { git = "https://github.com/akru/polkadot", branch = "crates-io" }
 
 # Substrate dependencies
-substrate-test-runtime-client = { git = "https://github.com/akru/substrate" }
-frame-system = { git = "https://github.com/akru/substrate" }
-pallet-grandpa = { git = "https://github.com/akru/substrate" }
-pallet-transaction-payment = { git = "https://github.com/akru/substrate" }
-sp-arithmetic = { git = "https://github.com/akru/substrate" }
-sp-version = { git = "https://github.com/akru/substrate" }
-pallet-sudo = { git = "https://github.com/akru/substrate" }
+#substrate-test-runtime-client = "2.0.0-rc5"
+frame-system = "2.0.0-rc5"
+pallet-grandpa = "2.0.0-rc5"
+pallet-transaction-payment = "2.0.0-rc5"
+sp-arithmetic = "2.0.0-rc5"
+sp-version = "2.0.0-rc5"
+pallet-sudo = "2.0.0-rc5"

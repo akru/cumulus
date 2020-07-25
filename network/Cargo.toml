@@ -7,18 +7,18 @@ edition = "2018"
 
 [dependencies]
 # substrate deps
-sp-blockchain = { git = "https://github.com/akru/substrate" }
-sp-consensus = { git = "https://github.com/akru/substrate" }
-sp-runtime = { git = "https://github.com/akru/substrate" }
-sp-api = { git = "https://github.com/akru/substrate" }
-sp-core = { git = "https://github.com/akru/substrate" }
+sp-blockchain = "2.0.0-rc5"
+sp-consensus = "0.8.0-rc5"
+sp-runtime = "2.0.0-rc5"
+sp-api = "2.0.0-rc5"
+sp-core = "2.0.0-rc5"
 
 # polkadot deps
-polkadot-collator = { git = "https://github.com/akru/polkadot" }
-polkadot-primitives = { git = "https://github.com/akru/polkadot" }
-polkadot-statement-table = { git = "https://github.com/akru/polkadot" }
-polkadot-validation = { git = "https://github.com/akru/polkadot" }
-polkadot-network = { git = "https://github.com/akru/polkadot" }
+polkadot-collator = { git = "https://github.com/akru/polkadot", branch = "crates-io" }
+polkadot-primitives = { git = "https://github.com/akru/polkadot", branch = "crates-io" }
+polkadot-statement-table = { git = "https://github.com/akru/polkadot", branch = "crates-io" }
+polkadot-validation = { git = "https://github.com/akru/polkadot", branch = "crates-io" }
+polkadot-network = { git = "https://github.com/akru/polkadot", branch = "crates-io" }
 
 # cumulus deps
 cumulus-primitives = { path = "../primitives" }
@@ -33,9 +33,9 @@ parking_lot = "0.10.2"
 cumulus-test-runtime = { path = "../test/runtime" }
 
 # substrate deps
-sc-client-api = { git = "https://github.com/akru/substrate" }
-sp-core = { git = "https://github.com/akru/substrate" }
-sp-keyring = { git = "https://github.com/akru/substrate" }
+sc-client-api = "2.0.0-rc5"
+sp-core = "2.0.0-rc5"
+sp-keyring = "2.0.0-rc5"
 
 # polkadot deps
-polkadot-test-runtime-client = { git = "https://github.com/akru/polkadot" }
+polkadot-test-runtime-client = { git = "https://github.com/akru/polkadot", branch = "crates-io" }
