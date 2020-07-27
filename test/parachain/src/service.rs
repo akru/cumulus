@@ -54,54 +54,54 @@ pub fn full_params(config: Configuration) -> Result<(
 	sp_inherents::InherentDataProviders,
 ), sc_service::Error>
 {
-		let inherent_data_providers = sp_inherents::InherentDataProviders::new();
+	let inherent_data_providers = sp_inherents::InherentDataProviders::new();
 
-		let (client, backend, keystore, task_manager) =
-			sc_service::new_full_parts::<
-				parachain_runtime::opaque::Block,
-				parachain_runtime::RuntimeApi,
-				crate::service::Executor,
-			>(&config)?;
-		let client = Arc::new(client);
+	let (client, backend, keystore, task_manager) =
+		sc_service::new_full_parts::<
+			parachain_runtime::opaque::Block,
+			parachain_runtime::RuntimeApi,
+			crate::service::Executor,
+		>(&config)?;
+	let client = Arc::new(client);
 
-		let registry = config.prometheus_registry();
+	let registry = config.prometheus_registry();
 
-		let pool_api = sc_transaction_pool::FullChainApi::new(
-			client.clone(), registry.clone(),
-		);
-		let transaction_pool = sc_transaction_pool::BasicPool::new_full(
-			config.transaction_pool.clone(),
-			std::sync::Arc::new(pool_api),
-			config.prometheus_registry(),
-			task_manager.spawn_handle(),
-			client.clone(),
-		);
+	let pool_api = sc_transaction_pool::FullChainApi::new(
+		client.clone(), registry.clone(),
+	);
+	let transaction_pool = sc_transaction_pool::BasicPool::new_full(
+		config.transaction_pool.clone(),
+		std::sync::Arc::new(pool_api),
+		config.prometheus_registry(),
+		task_manager.spawn_handle(),
+		client.clone(),
+	);
 
-		let import_queue = cumulus_consensus::import_queue::import_queue(
-			client.clone(),
-			client.clone(),
-			inherent_data_providers.clone(),
-			&task_manager.spawn_handle(),
-			registry.clone(),
-		)?;
+	let import_queue = cumulus_consensus::import_queue::import_queue(
+		client.clone(),
+		client.clone(),
+		inherent_data_providers.clone(),
+		&task_manager.spawn_handle(),
+		registry.clone(),
+	)?;
 
-		let params = sc_service::ServiceParams {
-			config,
-			backend,
-			client,
-			import_queue,
-			keystore,
-			task_manager,
-			rpc_extensions_builder: Box::new(|_| ()),
-			transaction_pool,
-			block_announce_validator_builder: None,
-			finality_proof_provider: None,
-			finality_proof_request_builder: None,
-			on_demand: None,
-			remote_blockchain: None,
-		};
+	let params = sc_service::ServiceParams {
+		config,
+		backend,
+		client,
+		import_queue,
+		keystore,
+		task_manager,
+		rpc_extensions_builder: Box::new(|_| ()),
+		transaction_pool,
+		block_announce_validator_builder: None,
+		finality_proof_provider: None,
+		finality_proof_request_builder: None,
+		on_demand: None,
+		remote_blockchain: None,
+	};
 
-		Ok((params, inherent_data_providers))
+	Ok((params, inherent_data_providers))
 }
 
 /// Run a collator node with the given parachain `Configuration` and relaychain `Configuration`
@@ -113,11 +113,14 @@ pub fn run_collator(
 	mut polkadot_config: polkadot_collator::Configuration,
 	id: polkadot_primitives::v0::Id,
 	validator: bool,
-) -> sc_service::error::Result<ServiceComponents<
-	parachain_runtime::opaque::Block,
-	TFullBackend<parachain_runtime::opaque::Block>,
-	TFullClient<parachain_runtime::opaque::Block, parachain_runtime::RuntimeApi, crate::service::Executor>,
->> {
+) -> sc_service::error::Result<(
+	ServiceComponents<
+		parachain_runtime::opaque::Block,
+		TFullBackend<parachain_runtime::opaque::Block>,
+		TFullClient<parachain_runtime::opaque::Block, parachain_runtime::RuntimeApi, crate::service::Executor>,
+	>,
+	Arc<TFullClient<parachain_runtime::opaque::Block, parachain_runtime::RuntimeApi, crate::service::Executor>>,
+)> {
 	let mut parachain_config = prepare_collator_config(parachain_config);
 
 	parachain_config.informant_output_format = OutputFormat {
@@ -144,7 +147,7 @@ pub fn run_collator(
 	let client = params.client.clone();
 	let service_components = sc_service::build(params)?;
 
-	if validator || true {
+	if validator {
 		let proposer_factory = sc_basic_authorship::ProposerFactory::new(
 			client.clone(),
 			transaction_pool,
@@ -160,7 +163,7 @@ pub fn run_collator(
 			block_import,
 			client.clone(),
 			id,
-			client,
+			client.clone(),
 			announce_block,
 			block_announce_validator,
 		);
@@ -207,5 +210,5 @@ pub fn run_collator(
 			.spawn("polkadot", polkadot_future);
 	}
 
-	Ok(service_components)
+	Ok((service_components, client))
 }
