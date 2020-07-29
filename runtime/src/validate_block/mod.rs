@@ -19,8 +19,6 @@
 #[cfg(not(feature = "std"))]
 #[doc(hidden)]
 pub mod implementation;
-#[cfg(test)]
-mod tests;
 
 #[cfg(not(feature = "std"))]
 #[doc(hidden)]

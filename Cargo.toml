@@ -6,10 +6,6 @@ members = [
 	"parachain-upgrade",
 	"primitives",
 	"runtime",
-	"test/runtime",
-	"test/client",
-	"test/parachain/runtime",
-	"test/parachain/",
 	"upward-message",
 ]
 

@@ -18,9 +18,6 @@
 //!
 //! Contains message send between collators and logic to process them.
 
-#[cfg(test)]
-mod tests;
-
 use sp_api::ProvideRuntimeApi;
 use sp_blockchain::{Error as ClientError, HeaderBackend};
 use sp_consensus::block_validation::{BlockAnnounceValidator, Validation};
